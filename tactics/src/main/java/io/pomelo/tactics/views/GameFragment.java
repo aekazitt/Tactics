@@ -5,7 +5,6 @@
  */
 package io.pomelo.tactics.views;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,36 +18,52 @@ import io.pomelo.tactics.R;
 import io.pomelo.tactics.mechanics.Game;
 
 public class GameFragment extends Fragment {
-	/* Logging Assistants */
+	/*********************************/
+	/**		Logging Assistant(s) 	**/
+	/*********************************/
 	private static final String TAG = GameFragment.class.getSimpleName();
 	private static final boolean SHOW_LOG = false;
-	/**
-	 * 
-	 */
+	/*********************************/
+	/**			Constant(s)		 	**/
+	/*********************************/
 	private static final String SAVED_INSTANCE_IDENTIFIER = "saved_game_instance";
-	/* Variables used for View Creation */
-	private Game game;
-	/* View and Holder */
+	/*********************************/
+	/**		  View Injection(s)	 	**/
+	/*********************************/
 	@Bind(R.id.gameView)
 	protected GameView gameView;
-
-	/** Default Constructor **/
+	/*********************************/
+	/**		Member Variable(s)	 	**/
+	/*********************************/
+	private Game game;
+	/*********************************/
+	/**		  Constructor(s)	 	**/
+	/*********************************/
+	/**
+	 * Default Constructor
+	 */
 	public GameFragment() {
 		super();
 	}
-	/**
-	 * Constructor used for calling new event
-	 * @param context
-	 */
-	public GameFragment(Context context) {
-		super();
+	/*********************************/
+	/**		Lifecycle Override(s) 	**/
+	/*********************************/
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (SHOW_LOG) Log.d(TAG, "onActivityCreated");
+		if (game==null) {
+			if (savedInstanceState!=null)
+				game = savedInstanceState.getParcelable(SAVED_INSTANCE_IDENTIFIER);
+			gameView.setGame((game!=null)? game : new Game());
+		}
+		game = gameView.getGame();
 	}
-	/*******************************/
-	/* Fragment/Activity Functions */
-	/*******************************/
-	/**
-	 * Fragment: onCreateView
-	 */
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		if (SHOW_LOG) Log.d(TAG, "onActivityCreated");
+	}
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
@@ -57,33 +72,16 @@ public class GameFragment extends Fragment {
 		ButterKnife.bind(this, view);
 		return view;
 	}
-	/**
-	 * Fragment: onActivityCreated
-	 */
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		if (SHOW_LOG) Log.d(TAG, "onActivityCreated");
-		if (game==null) {
-			if (savedInstanceState!=null) 
-				game = (Game) savedInstanceState.getParcelable(SAVED_INSTANCE_IDENTIFIER);
-			gameView.setGame((game!=null)? game : new Game());
-		}
-		game = gameView.getGame();
-	}
 	@Override
 	public void onResume() {
 		super.onResume();
 		if (SHOW_LOG) Log.d(TAG, "onResume");
 	}
-	/**
-	 * Fragment: onRestoreInstanceState
-	 */
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (SHOW_LOG) Log.d(TAG, "onSaveInstanceState");
-		if (game!=null) outState.putParcelable(SAVED_INSTANCE_IDENTIFIER , game);
+		if (game!=null) outState.putParcelable(SAVED_INSTANCE_IDENTIFIER, game);
 	}
 
 	@Override

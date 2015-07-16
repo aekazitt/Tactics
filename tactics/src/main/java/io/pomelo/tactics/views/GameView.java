@@ -1,6 +1,5 @@
 package io.pomelo.tactics.views;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.opengl.GLSurfaceView;
@@ -16,41 +15,42 @@ import io.pomelo.tactics.mechanics.Element;
 import io.pomelo.tactics.mechanics.Game;
 
 public class GameView extends GLSurfaceView implements SurfaceHolder.Callback, OnTouchListener {
-	/* Logging Assistants */
+	/*********************************/
+	/**		Logging Assistant(s) 	**/
+	/*********************************/
 	private static final String TAG = GameView.class.getSimpleName();
 	private static final boolean SHOW_LOG = false;
-	/* Member Variables */
+	/*********************************/
+	/**			Constant(s)		 	**/
+	/*********************************/
+	/**
+	 * enumeration used to control the state of the surfaceView
+	 */
+	public enum GameState {	CREATED, RUNNING, PAUSED, DESTROYED }
+	/*********************************/
+	/**		Member Variable(s)	 	**/
+	/*********************************/
 	private Bounds bounds;
-	private SurfaceHolder holder;
-	
-	/** enumeration used to control the state of the surfaceView **/ 
-	public enum GameState {	CREATED, RUNNING, PAUSED, STOPPED, DESTROYED; }
+	private final SurfaceHolder holder;
 	private Game game;
+	/**
+	 * Runs game thread in the background to update and draw surfaceholder
+	 */
 	private GameThread gameThread;
-	/** gameState is used to control the state of the surfaceView **/
+	/**
+	 * gameState is used to control the state of the surfaceView
+	 */
 	protected GameState gameState;
+
+	/*********************************/
+	/**		  Constructor(s)	 	**/
+	/*********************************/
 	/**
 	 * Constructor
-	 * @param context
+	 * @param context ApplicationContext
 	 */
 	public GameView(Context context) {
 		super(context);
-		init(context);
-	}
-	/**
-	 * Constructor with AttributeSet (When attached to XML Layouts)
-	 * @param context
-	 * @param attrs
-	 */
-	public GameView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init(context);
-	}
-	/**
-	 * Initiate the Game Element Class
-	 */
-	@SuppressLint("ClickableViewAccessibility")
-	protected void init(Context context) {
 		bounds = new Bounds();
 		Element.init(context, bounds);
 		gameState = GameState.CREATED;
@@ -59,6 +59,24 @@ public class GameView extends GLSurfaceView implements SurfaceHolder.Callback, O
 		setOnTouchListener(this);
 		setFocusable(true);
 	}
+	/**
+	 * Constructor with AttributeSet (When attached to XML Layouts)
+	 * @param context ApplicationContext
+	 * @param attrs AttributeSets when added to XML layout files
+	 */
+	public GameView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		bounds = new Bounds();
+		Element.init(context, bounds);
+		gameState = GameState.CREATED;
+		holder = getHolder();
+		holder.addCallback(this);
+		setOnTouchListener(this);
+		setFocusable(true);
+	}
+	/*********************************/
+	/**	  SurfaceHolder.Callback(s)	**/
+	/*********************************/
 	/**
 	 * Called once when created
 	 */
@@ -86,14 +104,13 @@ public class GameView extends GLSurfaceView implements SurfaceHolder.Callback, O
 	/*********************************/
 	/** 		Touch Listener 		**/
 	/*********************************/
-	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		return game.processInput(event);
 	}
-	/********************************/
-	/* 	Surface Callback Functions 	*/
-	/********************************/
+	/*********************************/
+	/**	  SurfaceHolder.Callback(s)	**/
+	/*********************************/
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		if (SHOW_LOG) Log.d(TAG, "surfaceCreated");
@@ -117,6 +134,7 @@ public class GameView extends GLSurfaceView implements SurfaceHolder.Callback, O
 					retry = false;
 				} catch (InterruptedException e) {
 					if (SHOW_LOG) Log.e(TAG, e.getMessage());
+					gameState = GameState.DESTROYED;
 				}
 			}
 		}
@@ -125,32 +143,34 @@ public class GameView extends GLSurfaceView implements SurfaceHolder.Callback, O
 	/*			Game Thread		  */
 	/******************************/
 	protected class GameThread extends Thread {
-		private SurfaceHolder surfaceHolder;
+		private final SurfaceHolder surfaceHolder;
 		private boolean threadIsRunning;
 		/**
 		 * Constructor used to create GameThread, update is made onto SurfaceHolder from here on.
-		 * @param holder
+		 * @param holder the surfaceHolder reference used by GameThread to draw on
 		 */
 		public GameThread(SurfaceHolder holder) {
 			if (SHOW_LOG) Log.d(TAG, "Thread constructed");
 			this.surfaceHolder = holder;
 			threadIsRunning = true;
+			gameState = GameState.RUNNING;
 			setName("Tactics' Game Thread");
 		}
 		/**
 		 * Set the boolean value of threadIsRunning
-		 * @param run
+		 * @param run boolean value to set this Thread state
 		 */
 		public void setRunning(boolean run) {
 			if (SHOW_LOG) Log.d(TAG, "setRunning");
 			threadIsRunning = run;
+			gameState = (run)? GameState.RUNNING : GameState.PAUSED;
 		}
 		/**
 		 * 
 		 * @return threadIsRunning
 		 */
 		public boolean isRunning() {
-			if (SHOW_LOG) Log.d(TAG, "isRunning");
+            if (SHOW_LOG) Log.d(TAG, "isRunning");
 			return threadIsRunning;
 		}
 		@Override

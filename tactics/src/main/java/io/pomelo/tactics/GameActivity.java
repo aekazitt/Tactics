@@ -1,21 +1,23 @@
 package io.pomelo.tactics;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import io.pomelo.tactics.views.GameFragment;
 
-public class GameActivity extends ActionBarActivity {
+public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new GameFragment(GameActivity.this)).commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.container, new GameFragment())
+                    .commit();
         }
     }
 
@@ -27,10 +29,9 @@ public class GameActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings: return true;
+            default: return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }
