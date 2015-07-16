@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/GameActivity.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/Anim.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/Bounds.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/Element.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/FPSMonitor.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/Game.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/Level.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/Pawn.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/Player.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/Tile.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/TileCoordinates.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/mechanics/TileMonitor.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/views/GameFragment.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/java/io/pomelo/tactics/views/GameView.java" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable-hdpi/ic_launcher.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable-mdpi/ic_launcher.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable-xhdpi/ic_launcher.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable-xxhdpi/ic_launcher.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable/circle_pad_neutral.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable/circle_pad_touched.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable/player_base.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable/tile_0.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable/tile_1.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable/tile_2.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable/tile_3.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/drawable/tile_4.png" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/layout/activity_game.xml" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/layout/fragment_game.xml" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/menu/menu_game.xml" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/values/dimens.xml" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/values/strings.xml" charset="x-windows-950" />
+    <file url="file://$PROJECT_DIR$/tactics/src/main/res/values/styles.xml" charset="x-windows-950" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
